@@ -40,3 +40,5 @@ prod_to_category.index.name = '_id'
 prod_to_category.rename(columns={0: 'pictures'}, inplace=True)
 prod_to_category.rename(columns={1: 'category_id'}, inplace=True)
 
+#%%
+plt.imshow(prod_to_category["pictures"][0])
