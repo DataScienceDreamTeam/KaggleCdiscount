@@ -99,3 +99,5 @@ ENV/
 
 # mypy
 .mypy_cache/
+Data/test.bson
+Data/train.bson
