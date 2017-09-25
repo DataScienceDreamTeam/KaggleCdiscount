@@ -17,11 +17,9 @@ class ExtractBson:
 
     def __init__(self):
 
-        self.bson_filepath = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\Data\\train.bson"
-        self.extract_directory = "E:\\KaggleCdiscountTrainSplit"
-        self.extract_directory_multiprocess = "E:\\KaggleCdiscountTrainSplitMultiProcess"
-        
-        
+        self.bson_filepath = "G:\KaggleCdiscount\\train.bson"
+        self.extract_directory = "G:\\KaggleCdiscountTrainSplit"
+        self.extract_directory_multiprocess = "G:\\KaggleCdiscountTrainSplitMultiProcess"      
 
     def get_image_file_name(self, product_id, index_image):
         return f'{product_id:08}'"_"f'{index_image:02}'".png"
@@ -54,10 +52,15 @@ class ExtractBson:
             bson_file_iter = bson.decode_file_iter(open(self.bson_filepath, "rb"))
             pool = mp.Pool(mp.cpu_count() * 4)
 
-            for k in range(750):    
+            #7069896 products, 36 * 200000 = 7200000
+            for k in range(36):    
                 print("processing, k = %i" % k)
-                data_slice = itertools.islice(bson_file_iter, 10000 * k, 10000 * (k+1))
-                pool.map_async(self.process,data_slice)
+                data_slice = itertools.islice(bson_file_iter, 200000)
+                result = pool.map_async(self.process,data_slice)
+
+                while not result.ready():
+                    print("wait for, k = %i" % k)
+                    result.wait(1000)
                                 
             pool.close()
             pool.join()

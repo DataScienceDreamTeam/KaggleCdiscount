@@ -1,26 +1,61 @@
 import multiprocessing as mp
 import time
 import itertools
+import bson
 
-def Func(N):
-    print("in :" + str(N))
-    time.sleep(2)
+def process(data):
+    return data["_id"]
+
 
 if __name__ == '__main__':
 
-    myRange = range(100)
+    bson_filepath = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\\Data\\train.bson"
+    bson_file_iter = bson.decode_file_iter(open(bson_filepath, "rb"))
 
-    mySlice1 =  itertools.islice(myRange, 0, 20)
-    mySlice2 =  itertools.islice(myRange,20, 40)
-    mySlice3 =  itertools.islice(myRange,40, 60)
-    mySlice4 =  itertools.islice(myRange,60, 80)
-    mySlice5 =  itertools.islice(myRange,80, 110)
+    pool = mp.Pool(mp.cpu_count() * 4)
 
-    for i,j in enumerate(mySlice1):
-        print(str(i) + " " + str(j))
-    print("ha")
-    for i,j in enumerate(mySlice5):
-        print(str(i) + " " + str(j))
+    nbProducts = 0
+
+    results = []
+    t0 = time.time()
+    for k in range(36):  
+
+        pool = mp.Pool(mp.cpu_count() * 4)  
+        print("processing, k = %i" % k)
+        data_slice = itertools.islice(bson_file_iter, 200000)
+        result = pool.map_async(process,data_slice)
+
+        while not result.ready():
+            print("wait for, k = %i" % k)
+            result.wait(1000)
+
+        results.append(result)
+
+
+    t1 = time.time()
+    total_time = t1 - t0
+    print("Time for initializing pools : %s" % str(total_time))
+
+    for res in results:    
+        real_result = res.get()
+        nbProducts = nbProducts + len(real_result)
+        print(nbProducts)
+
+    t2 = time.time()
+    total_time = t2 - t1
+    print("Time forget results: %s" % str(total_time))
+
+    pool.close()
+    pool.join()
+
+    t3 = time.time()
+    total_time = t3 - t2
+    print("Time for close and join : %s" % str(total_time))
+
+    print(nbProducts)
+
+
+
 
     # print("start")
     # pool=mp.Pool(2)
