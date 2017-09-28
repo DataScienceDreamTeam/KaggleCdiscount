@@ -56,8 +56,6 @@ def ReadAllFileMultiProcess(read_mode):
     bson_file_iter = bson.decode_file_iter(open(Config.BSON_TRAIN_FILE, "rb"))
     pool = mp.Pool(mp.cpu_count() * 4)
 
-    nb_products_read = 0
-
     results_multi = []
 
     for k in range(Config.MULTI_PROCESS_NB_ITER):   
@@ -109,10 +107,10 @@ def process_openimageandsave(d):
 
 if __name__ == '__main__':
 
-    # ReadAllFile("READ")
+    ReadAllFile("READ")
     # ReadAllFile("OPENIMAGE")
     # ReadAllFile("OPENIMAGEANDSAVE")
 
     ReadAllFileMultiProcess("READ")
-    ReadAllFileMultiProcess("OPENIMAGE")
-    ReadAllFileMultiProcess("OPENIMAGEANDSAVE")
+    # ReadAllFileMultiProcess("OPENIMAGE")
+    # ReadAllFileMultiProcess("OPENIMAGEANDSAVE")
