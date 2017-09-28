@@ -87,7 +87,7 @@ def ReadAllFileOpenImagesStoreInArray():
 
 print(sys.argv)
 print("Environment = %s" % Config.ENVIRONMENT)
-print("Max products to process = %i" % Config.MAX_PRODUCTS_TO_PROCESS)
+print("Max products to process = %s" % Config.MAX_PRODUCTS_TO_PROCESS)
 ReadAllFile()
 ReadAllFileOpenImages()
 ReadAllFileOpenImagesStoreInArray()
