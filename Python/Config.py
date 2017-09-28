@@ -3,9 +3,9 @@ import sys
 if sys.argv[1] == "VM":
     BSON_TRAIN_FILE = "/datadrive/KaggleCdiscount/train.bson"
     ENVIRONMENT = "VM"
-    MAX_PRODUCTS_TO_PROCESS = 100000
-    MULTI_PROCESS_BATCH_SIZE = 10000
-    MULTI_PROCESS_NB_ITER = 10
+    MAX_PRODUCTS_TO_PROCESS = None
+    MULTI_PROCESS_BATCH_SIZE = 200000
+    MULTI_PROCESS_NB_ITER = 36
 else:
     BSON_TRAIN_FILE = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\\Data\\train.bson"
     ENVIRONMENT = "LAPTOP"
