@@ -4,6 +4,7 @@ import bson
 import random
 import time
 import io
+import sys
 
 from skimage.data import imread
 
@@ -84,23 +85,9 @@ def ReadAllFileOpenImagesStoreInArray():
     total_time = t2 - t1
     print(total_time)
 
+print(sys.argv)
 print("Environment = %s" % Config.ENVIRONMENT)
 print("Max products to process = %i" % Config.MAX_PRODUCTS_TO_PROCESS)
 ReadAllFile()
 ReadAllFileOpenImages()
 ReadAllFileOpenImagesStoreInArray()
-
-# Environment = LAPTOP
-# Max products to process = 100000
-# Start ReadAllFile
-# BSON_TRAIN_FILE : C:\Users\gael.superi\Documents\GitHub\KaggleCdiscount\Data\train.bson
-# End ReadAllFile
-# 1.1795589923858643
-# Start ReadAllFileOpenImages
-# BSON_TRAIN_FILE : C:\Users\gael.superi\Documents\GitHub\KaggleCdiscount\Data\train.bson
-# end ReadAllFileOpenImages
-# 99.59711289405823
-# Start ReadAllFileOpenImagesStoreInArray
-# BSON_TRAIN_FILE : C:\Users\gael.superi\Documents\GitHub\KaggleCdiscount\Data\train.bson
-# end ReadAllFileOpenImagesStoreInArray
-# 125.12258720397949
