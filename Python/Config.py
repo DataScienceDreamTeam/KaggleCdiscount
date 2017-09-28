@@ -3,7 +3,7 @@ import sys
 if sys.argv[1] == "VM":
     BSON_TRAIN_FILE = "/datadrive/KaggleCdiscount/train.bson"
     ENVIRONMENT = "VM"
-    MAX_PRODUCTS_TO_PROCESS = None
+    MAX_PRODUCTS_TO_PROCESS = 20000000
     MULTI_PROCESS_BATCH_SIZE = 200000
     MULTI_PROCESS_NB_ITER = 36
 else:

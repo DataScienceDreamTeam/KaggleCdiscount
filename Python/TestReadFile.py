@@ -36,9 +36,8 @@ def ReadAllFile(read_mode):
 
         nb_products_read = nb_products_read + 1
 
-        if not Config.MAX_PRODUCTS_TO_PROCESS is None: 
-            if nb_products_read == Config.MAX_PRODUCTS_TO_PROCESS:
-                break
+        if nb_products_read == Config.MAX_PRODUCTS_TO_PROCESS:
+            break
 
     t2 = time.time()
     print("End ReadAllFile")
