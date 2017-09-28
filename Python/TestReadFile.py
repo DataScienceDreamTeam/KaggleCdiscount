@@ -107,10 +107,10 @@ def process_openimageandsave(d):
 
 if __name__ == '__main__':
 
-    ReadAllFile("READ")
-    # ReadAllFile("OPENIMAGE")
+    # ReadAllFile("READ")
+    ReadAllFile("OPENIMAGE")
     # ReadAllFile("OPENIMAGEANDSAVE")
 
-    ReadAllFileMultiProcess("READ")
-    # ReadAllFileMultiProcess("OPENIMAGE")
+    # ReadAllFileMultiProcess("READ")
+    ReadAllFileMultiProcess("OPENIMAGE")
     # ReadAllFileMultiProcess("OPENIMAGEANDSAVE")

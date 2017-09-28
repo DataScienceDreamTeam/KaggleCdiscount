@@ -10,6 +10,6 @@ if sys.argv[1] == "VM":
 else:
     BSON_TRAIN_FILE = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\\Data\\train.bson"
     ENVIRONMENT = "LAPTOP"
-    MAX_PRODUCTS_TO_PROCESS = 100000
-    MULTI_PROCESS_BATCH_SIZE = 10000
-    MULTI_PROCESS_NB_ITER = 10
+    MAX_PRODUCTS_TO_PROCESS = 20000000
+    MULTI_PROCESS_BATCH_SIZE = 200000
+    MULTI_PROCESS_NB_ITER = 36
