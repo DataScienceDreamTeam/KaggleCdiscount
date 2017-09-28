@@ -36,6 +36,9 @@ def ReadAllFile(read_mode):
 
         nb_products_read = nb_products_read + 1
 
+        if nb_products_read % 200000 == 0:
+            print(nb_products_read)
+
         if nb_products_read == Config.MAX_PRODUCTS_TO_PROCESS:
             break
 
