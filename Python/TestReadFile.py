@@ -5,26 +5,37 @@ import random
 import time
 import io
 import sys
-
+import multiprocessing as mp
+import itertools
 from skimage.data import imread
+from functools import partial
 
 import Config
 
-def ReadAllFile():
+def ReadAllFile(read_mode):
     t1 = time.time()
-    print("Start ReadAllFile")
+    print("Start ReadAllFile : %s" % read_mode)
     print("BSON_TRAIN_FILE : %s" % Config.BSON_TRAIN_FILE)
 
     bson_file_iter = bson.decode_file_iter(open(Config.BSON_TRAIN_FILE, "rb"))
 
     nb_products_read = 0
+    results = []
     for c, d in enumerate(bson_file_iter):
         product_id = d["_id"]
 
         for index_image, image in enumerate(d["imgs"]):
-            pass
+
+            if read_mode == "READ":
+                pass
+            elif read_mode == "OPENIMAGE":
+                picture = imread(io.BytesIO(image['picture']))
+            elif read_mode == "OPENIMAGEANDSAVE":
+                picture = imread(io.BytesIO(image['picture']))
+                results.append(picture)
 
         nb_products_read = nb_products_read + 1
+
         if not Config.MAX_PRODUCTS_TO_PROCESS is None: 
             if nb_products_read == Config.MAX_PRODUCTS_TO_PROCESS:
                 break
@@ -34,60 +45,72 @@ def ReadAllFile():
     total_time = t2 - t1
     print(total_time)
 
-def ReadAllFileOpenImages():
+def ReadAllFileMultiProcess(read_mode):
+
     t1 = time.time()
-    print("Start ReadAllFileOpenImages")
+    print("Start ReadAllFileMultiProcess : %s" % read_mode)
     print("BSON_TRAIN_FILE : %s" % Config.BSON_TRAIN_FILE)
 
     bson_file_iter = bson.decode_file_iter(open(Config.BSON_TRAIN_FILE, "rb"))
+    pool = mp.Pool(mp.cpu_count() * 4)
 
     nb_products_read = 0
-    for c, d in enumerate(bson_file_iter):
-        product_id = d["_id"]
 
-        for index_image, image in enumerate(d["imgs"]):
-            picture = imread(io.BytesIO(image['picture']))
+    results_multi = []
 
-        nb_products_read = nb_products_read + 1
-        if not Config.MAX_PRODUCTS_TO_PROCESS is None: 
-            if nb_products_read == Config.MAX_PRODUCTS_TO_PROCESS:
-                break
+    for k in range(Config.MULTI_PROCESS_NB_ITER):   
+
+        data_slice = itertools.islice(bson_file_iter, Config.MULTI_PROCESS_BATCH_SIZE)
+        if read_mode == "READ":
+            result = pool.map_async(process_read,data_slice)
+        elif read_mode == "OPENIMAGE":
+            result = pool.map_async(process_openimage,data_slice)
+        elif read_mode == "OPENIMAGEANDSAVE":
+            result = pool.map_async(process_openimageandsave,data_slice)
+
+        while not result.ready():
+            result.wait(1000)
+            results_multi.append(result.get())
+
+    pool.close()
+    pool.join()
 
     t2 = time.time()
-    print("end ReadAllFileOpenImages")
+    print("End ReadAllFileMultiProcess")
     total_time = t2 - t1
     print(total_time)
 
-def ReadAllFileOpenImagesStoreInArray():
-
-    t1 = time.time()
-    print("Start ReadAllFileOpenImagesStoreInArray")
-    print("BSON_TRAIN_FILE : %s" % Config.BSON_TRAIN_FILE)
-
-    bson_file_iter = bson.decode_file_iter(open(Config.BSON_TRAIN_FILE, "rb"))
-
+def process_read(d):
     results = []
-    nb_products_read = 0
-    for c, d in enumerate(bson_file_iter):
-        product_id = d["_id"]
+    product_id = d["_id"]
+    category_id = d["category_id"]
+    for index_image, image in enumerate(d["imgs"]):
+        pass
+    return results  
 
-        for index_image, image in enumerate(d["imgs"]):
-            picture = imread(io.BytesIO(image['picture']))
-            results.append(picture)
+def process_openimage(d):
+    results = []
+    product_id = d["_id"]
+    category_id = d["category_id"]
+    for index_image, image in enumerate(d["imgs"]):
+        picture = imread(io.BytesIO(image['picture']))
+    return results  
 
-        nb_products_read = nb_products_read + 1
-        if not Config.MAX_PRODUCTS_TO_PROCESS is None: 
-            if nb_products_read == Config.MAX_PRODUCTS_TO_PROCESS:
-                break
+def process_openimageandsave(d):
+    results = []
+    product_id = d["_id"]
+    category_id = d["category_id"]
+    for index_image, image in enumerate(d["imgs"]):
+        picture = imread(io.BytesIO(image['picture']))
+        results.append(picture)
+    return results  
 
-    t2 = time.time()
-    print("end ReadAllFileOpenImagesStoreInArray")
-    total_time = t2 - t1
-    print(total_time)
+if __name__ == '__main__':
 
-print(sys.argv)
-print("Environment = %s" % Config.ENVIRONMENT)
-print("Max products to process = %s" % Config.MAX_PRODUCTS_TO_PROCESS)
-ReadAllFile()
-ReadAllFileOpenImages()
-ReadAllFileOpenImagesStoreInArray()
+    ReadAllFile("READ")
+    ReadAllFile("OPENIMAGE")
+    ReadAllFile("OPENIMAGEANDSAVE")
+
+    ReadAllFileMultiProcess("READ")
+    ReadAllFileMultiProcess("OPENIMAGE")
+    ReadAllFileMultiProcess("OPENIMAGEANDSAVE")
