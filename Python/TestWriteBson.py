@@ -13,6 +13,21 @@ import Config
 
 
 
+def read_train_export():
+
+    bson_file_iter = bson.decode_file_iter(open(Config.BSON_TRAIN_FILE, "rb"))
+    bson_filepath =  Config.WRITE_FILE_DIRECTORY + "\\export.bson"
+    with open(bson_filepath,"wb") as new_file_bson:
+        for c, d in enumerate(bson_file_iter):
+            if c == 1:
+                break
+
+            for index_image, image in enumerate(d["imgs"]):
+                with open(Config.WRITE_FILE_DIRECTORY + "\\" + str(c) +"_" + str(index_image) + ".bmp","wb") as new_jpg:
+                    new_jpg.write(image["picture"])
+
+            new_file_bson.write(bson.BSON.encode(d))
+
 
 def write_bson():
 
@@ -38,5 +53,6 @@ def read_bson():
         print(d["key2"])
 
 
-write_bson()
-read_bson()
+# write_bson()
+# read_bson()
+read_train_export()
