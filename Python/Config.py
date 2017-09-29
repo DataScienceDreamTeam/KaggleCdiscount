@@ -13,3 +13,4 @@ else:
     MAX_PRODUCTS_TO_PROCESS = 20000000
     MULTI_PROCESS_BATCH_SIZE = 200000
     MULTI_PROCESS_NB_ITER = 36
+    WRITE_FILE_DIRECTORY = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\\Data\\Temp"

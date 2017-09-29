@@ -13,3 +13,22 @@ Start ReadAllFileOpenImagesStoreInArray
 BSON_TRAIN_FILE : C:\Users\gael.superi\Documents\GitHub\KaggleCdiscount\Data\train.bson
 end ReadAllFileOpenImagesStoreInArray
 125.12258720397949
+
+
+
+gael.superi@MachineLearning:/datadrive/Github/KaggleCdiscount/Python$ python3 TestReadFile.py "VM"
+['TestReadFile.py', 'VM']
+Environment = VM
+Max products to process = 100000
+Start ReadAllFile
+BSON_TRAIN_FILE : /datadrive/KaggleCdiscount/train.bson
+End ReadAllFile
+0.8160345554351807
+Start ReadAllFileOpenImages
+BSON_TRAIN_FILE : /datadrive/KaggleCdiscount/train.bson
+end ReadAllFileOpenImages
+110.44612669944763
+Start ReadAllFileOpenImagesStoreInArray
+BSON_TRAIN_FILE : /datadrive/KaggleCdiscount/train.bson
+end ReadAllFileOpenImagesStoreInArray
+118.47970080375671
