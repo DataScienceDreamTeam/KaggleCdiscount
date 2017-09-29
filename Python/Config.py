@@ -11,11 +11,18 @@ if sys.argv[1] == "VM":
 elif sys.argv[1] == "DESKTOP":
 
     BSON_TRAIN_FILE = "G:\\KaggleCdiscount\\train.bson"
+    SOURCE_CATEGORY_NAMES_CSV = "C:\\Users\\gaels\\Documents\\GitHub\\KaggleCdiscount\\Data\\category_names.csv"
+
+    NUMPY_RANDOM_SEED = 779493057
+    NB_CATEGORIES_TO_KEEP = 527 # Total cat = 5270
+    DEST_CATEGORY_NAMES_CSV = "C:\\Users\\gaels\\Documents\\GitHub\\KaggleCdiscount\\Data\\small_random_category_names.csv"
+
     ENVIRONMENT = "DESKTOP"
     MAX_PRODUCTS_TO_PROCESS = 20000000
     MULTI_PROCESS_BATCH_SIZE = 200000
     MULTI_PROCESS_NB_ITER = 36
     WRITE_FILE_DIRECTORY = "G:\\KaggleCdiscount\\Temp"
+
     
 elif sys.argv[1] == "LAPTOP":
 
