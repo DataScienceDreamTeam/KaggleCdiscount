@@ -12,10 +12,14 @@ elif sys.argv[1] == "DESKTOP":
 
     BSON_TRAIN_FILE = "G:\\KaggleCdiscount\\train.bson"
     SOURCE_CATEGORY_NAMES_CSV = "C:\\Users\\gaels\\Documents\\GitHub\\KaggleCdiscount\\Data\\category_names.csv"
+    DEST_CATEGORY_NAMES_CSV = "C:\\Users\\gaels\\Documents\\GitHub\\KaggleCdiscount\\Data\\small_random_category_names.csv"
+
+    BSON_SMALL_TRAIN_FILE = "C:\\Users\\gaels\\Documents\\GitHub\\KaggleCdiscount\\Data\\small_train.bson"
+    BSON_SMALL_VALIDATION_FILE = "C:\\Users\\gaels\\Documents\\GitHub\\KaggleCdiscount\\Data\\small_validation.bson"
 
     NUMPY_RANDOM_SEED = 779493057
-    NB_CATEGORIES_TO_KEEP = 527 # Total cat = 5270
-    DEST_CATEGORY_NAMES_CSV = "C:\\Users\\gaels\\Documents\\GitHub\\KaggleCdiscount\\Data\\small_random_category_names.csv"
+    NB_CATEGORIES_TO_KEEP = 3 # Total cat = 5270
+    PERCENT_TRAIN = 0.8
 
     ENVIRONMENT = "DESKTOP"
     MAX_PRODUCTS_TO_PROCESS = 20000000
@@ -27,6 +31,17 @@ elif sys.argv[1] == "DESKTOP":
 elif sys.argv[1] == "LAPTOP":
 
     BSON_TRAIN_FILE = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\\Data\\train.bson"
+    SOURCE_CATEGORY_NAMES_CSV = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\\Data\\category_names.csv"
+    DEST_CATEGORY_NAMES_CSV = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\\Data\\small_random_category_names.csv"
+    
+    BSON_SMALL_TRAIN_FILE = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\\Data\\small_train.bson"
+    BSON_SMALL_VALIDATION_FILE = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\\Data\\small_validation.bson"
+
+    NUMPY_RANDOM_SEED = 779493057
+    NB_CATEGORIES_TO_KEEP = 3 # Total cat = 5270
+    PERCENT_TRAIN = 0.8
+
+
     ENVIRONMENT = "LAPTOP"
     MAX_PRODUCTS_TO_PROCESS = 20000000
     MULTI_PROCESS_BATCH_SIZE = 200000
