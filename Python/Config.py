@@ -38,7 +38,7 @@ elif sys.argv[1] == "LAPTOP":
     BSON_SMALL_VALIDATION_FILE = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\\Data\\small_validation.bson"
 
     NUMPY_RANDOM_SEED = 779493057
-    NB_CATEGORIES_TO_KEEP = 3 # Total cat = 5270
+    NB_CATEGORIES_TO_KEEP = 5 # Total cat = 5270
     PERCENT_TRAIN = 0.8
 
 
