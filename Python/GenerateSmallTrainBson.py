@@ -36,7 +36,7 @@ def generate_random_categories():
 
 def generate_small_train_and_validation_bson_from_categories():
 
-    print("start generate_small_train_bson_from_random_categories_not_sorted")
+    print("start generate_small_train_and_validation_bson_from_categories")
 
     bson_file_iter = bson.decode_file_iter(open(Config.BSON_TRAIN_FILE, "rb"))
 
@@ -81,7 +81,8 @@ def generate_small_train_and_validation_bson_from_categories():
 
     print("nb_item_train : %s" % nb_item_train)
     print("nb_item_validation : %s" % nb_item_validation)
-    print("end generate_small_train_bson_from_random_categories_not_sorted")
+    
+    print("end generate_smallgenerate_small_train_and_validation_bson_from_categories_train_bson_from_random_categories_not_sorted")
 
 
 def test_generated_bson():

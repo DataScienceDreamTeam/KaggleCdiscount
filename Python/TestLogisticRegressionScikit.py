@@ -14,22 +14,13 @@ from sklearn import preprocessing
 #Trying on laptop to see if the code works and then run it with the VM
 
 
-def runLogisticRegression():
+def readFileGetXY(fileName):
 
-    t1 = time.time()
-    print("start TestLogisticRegressionScikit")
-    print("BSON_TRAIN_FILE : %s" % Config.BSON_SMALL_TRAIN_FILE)
+    print("start readFileGetXY %s" % fileName)
+    bson_file_iter = bson.decode_file_iter(open(fileName, "rb"))
 
-    bson_file_iter = bson.decode_file_iter(open(Config.BSON_SMALL_TRAIN_FILE, "rb"))
-
-    # input data = all pixels colors : 
-    # X = 180 x 180 x 3 x nb pictures
-    # Y = category id for all pictures
-    #
-
-    X_results = []
-    Y_categories = []
-
+    X = []
+    Y = []
 
     for c, d in enumerate(bson_file_iter):
         product_id = d["_id"]
@@ -39,24 +30,56 @@ def runLogisticRegression():
         for index_image, image in enumerate(d["imgs"]):
 
             picture = imread(io.BytesIO(image['picture']))
-            X_results.append(picture.reshape(-1))
-            Y_categories.append(category_id)
+            X.append(picture.reshape(-1))
+            Y.append(category_id)
+
+    return X,Y
+
+def save_model_parameters():
 
 
-    # Y = category id for all pictures, need to get the max prediction for each category
+    pass
 
+def runLogisticRegression():
+
+    t1 = time.time()
+    print("start TestLogisticRegressionScikit")
+
+    train_X_results,train_Y_categories = readFileGetXY(Config.BSON_SMALL_TRAIN_FILE)
+    validation_X_results,validation_Y_categories = readFileGetXY(Config.BSON_SMALL_VALIDATION_FILE)
+
+
+    print(len(train_X_results))
+    print(len(train_Y_categories))
+
+    print(len(validation_X_results))
+    print(len(validation_Y_categories))
+    
+   
     lb = preprocessing.LabelBinarizer()
+    print(lb.fit_transform(train_Y_categories))
+    print(lb.classes_)
+    print(lb.fit_transform(validation_Y_categories))
+    print(lb.classes_)
+    
 
     model = LogisticRegression()
     print("start fit")
-    model.fit(X_results,Y_categories)
+    model.fit(train_X_results,train_Y_categories)
     print("end fit")
 
-    print(model.score(X_results,Y_categories))
-    # predicted = model.predict(data_test)
+    prediction = model.predict(validation_X_results)
+    nb_prediction_ok = 0
+    
+    for index, value in enumerate(prediction):
+        if validation_Y_categories[index] == value:
+            nb_prediction_ok = nb_prediction_ok + 1
 
+    accuracy = nb_prediction_ok / len(prediction)
+    print("accuracy = %f" % accuracy)
 
-
+    model_parameters = model.get_params()
+    
     t2 = time.time()
     print("end TestLogisticRegressionScikit")
     total_time = t2 - t1
@@ -65,3 +88,5 @@ def runLogisticRegression():
 
 
 runLogisticRegression()
+
+
