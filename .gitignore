@@ -103,3 +103,5 @@ Data/test.bson
 Data/train.bson
 train.csv
 .vscode/launch.json
+Data/small_train.bson
+*.csv
