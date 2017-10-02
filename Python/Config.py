@@ -10,7 +10,7 @@ if sys.argv[1] == "VM":
 
 elif sys.argv[1] == "DESKTOP":
 
-    BSON_TRAIN_FILE = "G:\\KaggleCdiscount\\train.bson"
+    BSON_TRAIN_FILE = "C:\\Users\\gaels\\Documents\\GitHub\\KaggleCdiscount\Data\\train.bson"
     SOURCE_CATEGORY_NAMES_CSV = "C:\\Users\\gaels\\Documents\\GitHub\\KaggleCdiscount\\Data\\category_names.csv"
     DEST_CATEGORY_NAMES_CSV = "C:\\Users\\gaels\\Documents\\GitHub\\KaggleCdiscount\\Data\\small_random_category_names.csv"
 
@@ -18,7 +18,7 @@ elif sys.argv[1] == "DESKTOP":
     BSON_SMALL_VALIDATION_FILE = "C:\\Users\\gaels\\Documents\\GitHub\\KaggleCdiscount\\Data\\small_validation.bson"
 
     NUMPY_RANDOM_SEED = 779493057
-    NB_CATEGORIES_TO_KEEP = 3 # Total cat = 5270
+    NB_CATEGORIES_TO_KEEP = 5 # Total cat = 5270
     PERCENT_TRAIN = 0.8
 
     ENVIRONMENT = "DESKTOP"
