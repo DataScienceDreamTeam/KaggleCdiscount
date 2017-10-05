@@ -105,3 +105,5 @@ train.csv
 .vscode/launch.json
 Data/small_train.bson
 *.csv
+Data/small_validation.bson
+Documents/~$Statistics.xlsx
