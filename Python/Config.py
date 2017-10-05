@@ -27,6 +27,10 @@ elif sys.argv[1] == "DESKTOP":
     MULTI_PROCESS_NB_ITER = 36
     WRITE_FILE_DIRECTORY = "G:\\KaggleCdiscount\\Temp"
 
+
+    #Extraction 
+    MAX_PICTURES_TO_EXTRACT = None
+
     
 elif sys.argv[1] == "LAPTOP":
 
@@ -47,3 +51,6 @@ elif sys.argv[1] == "LAPTOP":
     MULTI_PROCESS_BATCH_SIZE = 200000
     MULTI_PROCESS_NB_ITER = 36
     WRITE_FILE_DIRECTORY = "C:\\Users\\gael.superi\\Documents\\GitHub\\KaggleCdiscount\\Data\\Temp"
+
+    #Extraction 
+    MAX_PICTURES_TO_EXTRACT = 100

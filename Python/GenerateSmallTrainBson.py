@@ -85,21 +85,6 @@ def generate_small_train_and_validation_bson_from_categories():
     print("end generate_smallgenerate_small_train_and_validation_bson_from_categories_train_bson_from_random_categories_not_sorted")
 
 
-def test_generated_bson():
-
-    train = bson.decode_file_iter(open(Config.BSON_SMALL_TRAIN_FILE, "rb"))
-
-    for c,d in enumerate(train):
-
-        product_id = d["_id"]
-        category_id = d["category_id"]
-
-        print(str(product_id) + " " + str(category_id))
-        for index_image, image in enumerate(d["imgs"]):
-            with open(Config.WRITE_FILE_DIRECTORY + "\\" + str(c) +"_" + str(index_image) + ".jpg","wb") as new_jpg:
-                new_jpg.write(image["picture"])
-
-
 
 generate_random_categories()
 generate_small_train_and_validation_bson_from_categories()
